@@ -25,7 +25,7 @@
 
 ## About The Project
 
-![Screen Shot](img/panel.jpeg)
+![Screen Shot](Asset/img/publicacion.jpeg)
 
 
 There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
@@ -39,7 +39,8 @@ Here's why:
 
 ## About The Project
 
-![Screen Shot](img/view.jpeg)
+![Screen Shot](Asset/img/chatbot.jpeg)
+
 
 
 ## Roadmap
