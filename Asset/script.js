@@ -190,7 +190,7 @@ function enviarSolicitud(celda, messageContainer, boton) {
 
 function mostrarMensajeExitoso(messageContainer) {
     const parrafo = document.createElement("p");
-    parrafo.textContent = "Fue enviado con éxito. Recargue la página";
+    parrafo.textContent = "Ga Fue enviado con éxito. Recargue la página";
     parrafo.style.boxShadow = "2px 1px 9px 6px rgba(0, 110, 255, 0.7)";
     parrafo.style.color = "black";
     parrafo.style.padding = "10px";
