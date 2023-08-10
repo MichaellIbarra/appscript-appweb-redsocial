@@ -70,5 +70,6 @@ button:hover {
 }
 
 .small {
+    margin: 0px 20px;
     color: white;
 }

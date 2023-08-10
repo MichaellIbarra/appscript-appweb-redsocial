@@ -34,7 +34,7 @@ function enviarMensaje() {
                         var titulo = fila[2];
                         var descripcion = fila[3];
                         var categoria = fila[4];
-                        respuesta += `<p><strong>Fecha de la Noticia:</strong> ${marcaTemporal}</p><a href="${fotoOVideo}" target="_blank"><img style="margin-bottom: 10px;" width="300" height="200" src="${fotoOVideo}" alt="Dar Click"></a><p><strong>Título:</strong> ${titulo}</p><p><strong>Descripción:</strong> ${descripcion}</p><p><strong>Categoría:</strong> ${categoria}</p><hr>`;
+                        respuesta += `<p><strong>Fecha de la Noticia:</strong> ${marcaTemporal}</p><a href="${fotoOVideo}" target="_blank"><img style="margin-bottom: 10px;" width="290" height="200" src="${fotoOVideo}" alt="Dar Click"></a><p><strong>Título:</strong> ${titulo}</p><p><strong>Descripción:</strong> ${descripcion}</p><p><strong>Categoría:</strong> ${categoria}</p><hr>`;
                         resultadosEncontrados = true;
                     }
                 }
