@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <!-- Agrega el enlace al CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        label {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="mt-4">Noticias Que Fueron Enviados</h2>
+        <table class="table table-bordered table-striped mt-3" id="datosTabla">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Marca temporal</th>
+                    <th>Foto o Video</th>
+                    <th>Título de la publicación</th>
+                    <th>Descripción de la publicación</th>
+                    <th>Categoría</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <button class="btn btn-primary mt-3" id="mostrarRestoBoton" onclick="toggleRegistros()">Mostrar el
+            Resto</button>
+
+        <div class="container mt-4">
+            <h2>Publicar Noticias en el Sitio</h2>
+            <br>
+            <form>
+                <div class="form-group">
+                    <label for="nombreHoja">Nombre de Hoja:</label>
+                    <input type="text" class="form-control" id="nombreHoja" name="nombreHoja">
+                </div>
+                <div class="form-group">
+                    <label for="contenidoCelda1">Foto o Video</label>
+                    <input type="text" class="form-control" id="contenidoCelda1" name="contenidoCelda1">
+                </div>
+                <div class="form-group">
+                    <label for="contenidoCelda2">Título</label>
+                    <input type="text" class="form-control" id="contenidoCelda2" name="contenidoCelda2">
+                </div>
+                <div class="form-group">
+                    <label for="contenidoCelda3">Descripción</label>
+                    <input type="text" class="form-control" id="contenidoCelda3" name="contenidoCelda3">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="enviarDatos()">Enviar Datos</button>
+            </form>
+        </div>
+
+        <script>
+            function enviarDatos() {
+                var nombreHoja = document.getElementById("nombreHoja").value;
+                var contenidoCelda1 = document.getElementById("contenidoCelda1").value;
+                var contenidoCelda2 = document.getElementById("contenidoCelda2").value;
+                var contenidoCelda3 = document.getElementById("contenidoCelda3").value;
+
+                google.script.run.enviarDatosDesdeHTML(nombreHoja, contenidoCelda1, contenidoCelda2, contenidoCelda3);
+
+                // Borrar los campos después de enviar los datos
+                document.getElementById("nombreHoja").value = "";
+                document.getElementById("contenidoCelda1").value = "";
+                document.getElementById("contenidoCelda2").value = "";
+                document.getElementById("contenidoCelda3").value = "";
+            }
+        </script>
+    </div>
+
+
+
+    <script>
+        var spreadsheetId = '1ytH6wsx2XmXWXwxK08Vj5DHpabHrr_f8qOFb458c_Co';
+        var hoja = 'Respuestas de formulario 1';
+        var apiKey = 'AIzaSyAmCLwuc94_hiXPDcVsYWV7toMyPqsrot8';
+        var url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${hoja}?key=${apiKey}`;
+
+        var datosTabla = document.getElementById('datosTabla').getElementsByTagName('tbody')[0];
+        var dataValues;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                dataValues = data.values;
+
+                // Mostrar todos los registros automáticamente
+                for (var i = 0; i < dataValues.length; i++) {
+                    var newRow = datosTabla.insertRow();
+                    dataValues[i].forEach(cellValue => {
+                        var cell = newRow.insertCell();
+                        cell.appendChild(document.createTextNode(cellValue));
+                    });
+                }
+            });
+    </script>
+
+
+    <!-- Agrega el enlace al JavaScript de Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
