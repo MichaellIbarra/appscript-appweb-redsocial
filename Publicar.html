@@ -2,9 +2,8 @@
 <html>
 
 <head>
-    <base target="_top">
-    <!-- Agrega el enlace al CSS de Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         label {
             margin: 0px;
@@ -15,7 +14,13 @@
 
 <body>
     <div class="container">
-        <h2 class="mt-4">Noticias Que Fueron Enviados</h2>
+        <div class="wrapper">
+            <svg>
+                <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                    Noticias Del Formulario
+                </text>
+            </svg>
+        </div>
         <table class="table table-bordered table-striped mt-3" id="datosTabla">
             <thead class="thead-dark">
                 <tr>
@@ -29,28 +34,31 @@
             <tbody>
             </tbody>
         </table>
-        <button class="btn btn-primary mt-3" id="mostrarRestoBoton" onclick="toggleRegistros()">Mostrar el
-            Resto</button>
-
+        <div class="text-center">
+            <button class="btn btn-primary mt-3" id="mostrarMas" onclick="mostrarMasNoticias()">Mostrar Más
+                Noticias</button>
+            <button class="btn btn-secondary mt-3" id="mostrarMenos" onclick="mostrarMenosNoticias()">Mostrar Menos
+                Noticias</button>
+        </div>
         <div class="container mt-4">
             <h2>Publicar Noticias en el Sitio</h2>
             <br>
             <form>
                 <div class="form-group">
                     <label for="nombreHoja">Nombre de Hoja:</label>
-                    <input type="text" class="form-control" id="nombreHoja" name="nombreHoja">
+                    <input type="text" class="form-control" id="nombreHoja" name="nombreHoja" required>
                 </div>
                 <div class="form-group">
                     <label for="contenidoCelda1">Foto o Video</label>
-                    <input type="text" class="form-control" id="contenidoCelda1" name="contenidoCelda1">
+                    <input type="text" class="form-control" id="contenidoCelda1" name="contenidoCelda1" required>
                 </div>
                 <div class="form-group">
                     <label for="contenidoCelda2">Título</label>
-                    <input type="text" class="form-control" id="contenidoCelda2" name="contenidoCelda2">
+                    <input type="text" class="form-control" id="contenidoCelda2" name="contenidoCelda2" required>
                 </div>
                 <div class="form-group">
                     <label for="contenidoCelda3">Descripción</label>
-                    <input type="text" class="form-control" id="contenidoCelda3" name="contenidoCelda3">
+                    <input type="text" class="form-control" id="contenidoCelda3" name="contenidoCelda3" required>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="enviarDatos()">Enviar Datos</button>
             </form>
@@ -74,10 +82,69 @@
         </script>
     </div>
 
+    <script>
+        function extractDriveImageUrl(cellValue) {
+            var imageRegex = /https:\/\/drive\.google\.com\/open\?id=([\w-]+)/;
+            var videoRegex = /https:\/\/drive\.google\.com\/file\/d\/([\w-]+)\/view/;
+            var imageMatches = cellValue.match(imageRegex);
+            var videoMatches = cellValue.match(videoRegex);
+            if (imageMatches && imageMatches.length > 1) {
+                var imageId = imageMatches[1];
+                return `http://drive.google.com/uc?export=view&id=${imageId}`;
+            }
+            if (videoMatches && videoMatches.length > 1) {
+                var videoId = videoMatches[1];
+                return `https://drive.google.com/file/d/${videoId}/preview`;
+            }
+            return '';
+        }
 
+        var spreadsheetId = '1ytH6wsx2XmXWXwxK08Vj5DHpabHrr_f8qOFb458c_Co';
+        var hoja = 'Respuestas de formulario 1';
+        var apiKey = 'AIzaSyAmCLwuc94_hiXPDcVsYWV7toMyPqsrot8';
 
-    <script src="Asset/publicacion/publicar.js"></script>
+        var url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${hoja}?key=${apiKey}`;
 
+        var datosTabla = document.getElementById('datosTabla').getElementsByTagName('tbody')[0];
+        var dataValues;
+        var filasMostradas = 5; // Número de filas a mostrar inicialmente
+
+        function llenarTabla() {
+            datosTabla.innerHTML = ''; // Limpiar la tabla
+            for (var i = 1; i < filasMostradas + 1; i++) {
+                var newRow = datosTabla.insertRow();
+                dataValues[i].forEach((cellValue, index) => {
+                    var cell = newRow.insertCell();
+                    if (index === 1) {
+                        // Si es la columna de imagen, crear una etiqueta de imagen
+                        var img = document.createElement('img');
+                        img.src = extractDriveImageUrl(cellValue); // Usa la función para obtener la URL de la imagen
+                        img.style.maxWidth = '100px'; // Ajusta el tamaño de la imagen si es necesario
+                        cell.appendChild(img);
+                    } else {
+                        cell.appendChild(document.createTextNode(cellValue));
+                    }
+                });
+            }
+        }
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                dataValues = data.values;
+                llenarTabla();
+            });
+
+        function mostrarMasNoticias() {
+            filasMostradas += 5;
+            llenarTabla();
+        }
+
+        function mostrarMenosNoticias() {
+            filasMostradas = Math.max(filasMostradas - 5, 5); // Mínimo 5 filas mostradas
+            llenarTabla();
+        }
+    </script>
 
     <!-- Agrega el enlace al JavaScript de Bootstrap -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
