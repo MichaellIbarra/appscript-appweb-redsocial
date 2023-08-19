@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css?v893">
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <svg>
+                <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                    Noticias Del Formulario
+                </text>
+            </svg>
+        </div>
+        <table class="table table-bordered table-striped mt-3" id="datosTabla">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Marca temporal</th>
+                    <th>Foto o Video</th>
+                    <th>Título de la publicación</th>
+                    <th>Descripción de la publicación</th>
+                    <th>Categoría</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button data-label="Register" class="rainbow-hover" id="mostrarMas" onclick="mostrarMasNoticias()">
+                <span class="sp">Mostrar más</span>
+            </button>
+            <button data-label="Register" class="rainbow-hover" id="mostrarMenos" onclick="mostrarMenosNoticias()">
+                <span class="sp">Mostrar menos</span>
+            </button>
+        </div>
+        <div class="container mt-4">
+            <div class="wrapper">
+                <svg>
+                    <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                        Publicar La Noticia
+                    </text>
+                </svg>
+            </div>
+            <form class="form" style="margin: 0 auto;">
+                <p class="title">Registre La Noticia</p>
+                <p class="message">Se le recomienda escribir bien la Noticia. </p>
+                <label>
+                    <input class="input" type="text" class="form-control" id="nombreHoja" name="nombreHoja" required>
+                    <span>Nombre de la Hoja</span>
+                </label>
+
+                <label>
+                    <input class="input" type="text" class="form-control" id="contenidoCelda1" name="contenidoCelda1"
+                        required>
+                    <span>Link de la Foto o Video</span>
+                </label>
+                <label>
+                    <input class="input" type="text" class="form-control" id="contenidoCelda2" name="contenidoCelda2"
+                        required>
+                    <span>Título De la Publicación</span>
+                </label>
+                <label>
+                    <input class="input" type="text" class="form-control" id="contenidoCelda3" name="contenidoCelda3"
+                        required>
+                    <span>Descripción De la Publicación</span>
+                </label>
+                <button type="button" class="submit" onclick="enviarDatos()">Enviar Datos</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+
+        const nombreHojaInput = document.getElementById('nombreHoja');
+        const contenidoCelda1Input = document.getElementById('contenidoCelda1');
+        const contenidoCelda2Input = document.getElementById('contenidoCelda2');
+        const contenidoCelda3Input = document.getElementById('contenidoCelda3');
+        const enviarBoton = document.getElementById('enviarBoton');
+
+        // Función para habilitar o deshabilitar el botón de enviar según el contenido de los campos
+        function verificarCampos() {
+            if (
+                nombreHojaInput.value.trim() !== '' &&
+                contenidoCelda1Input.value.trim() !== '' &&
+                contenidoCelda2Input.value.trim() !== '' &&
+                contenidoCelda3Input.value.trim() !== ''
+            ) {
+                enviarBoton.removeAttribute('disabled');
+            } else {
+                enviarBoton.setAttribute('disabled', 'true');
+            }
+        }
+
+        // Llamamos a la función de verificación cuando cambia el contenido de los campos
+        nombreHojaInput.addEventListener('input', verificarCampos);
+        contenidoCelda1Input.addEventListener('input', verificarCampos);
+        contenidoCelda2Input.addEventListener('input', verificarCampos);
+        contenidoCelda3Input.addEventListener('input', verificarCampos);
+
+        function enviarDatos() {
+            var nombreHoja = document.getElementById("nombreHoja").value;
+            var contenidoCelda1 = document.getElementById("contenidoCelda1").value;
+            var contenidoCelda2 = document.getElementById("contenidoCelda2").value;
+            var contenidoCelda3 = document.getElementById("contenidoCelda3").value;
+
+            google.script.run.enviarDatosDesdeHTML(nombreHoja, contenidoCelda1, contenidoCelda2, contenidoCelda3);
+
+            // Borrar los campos después de enviar los datos
+            document.getElementById("nombreHoja").value = "";
+            document.getElementById("contenidoCelda1").value = "";
+            document.getElementById("contenidoCelda2").value = "";
+            document.getElementById("contenidoCelda3").value = "";
+        }
+    </script>
+
+    <script src="Asset/script.js"></script>
+
+    <!-- Agrega el enlace al JavaScript de Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
