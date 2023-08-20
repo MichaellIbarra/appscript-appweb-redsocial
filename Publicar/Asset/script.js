@@ -5,7 +5,7 @@ function extractDriveImageUrl(cellValue) {
     var videoMatches = cellValue.match(videoRegex);
     if (imageMatches && imageMatches.length > 1) {
         var imageId = imageMatches[1];
-        return `http://drive.google.com/uc?export=view&id=${imageId}`;
+        return `https://drive.google.com/file/d/${imageId}/preview`; // Cambio aquí
     }
     if (videoMatches && videoMatches.length > 1) {
         var videoId = videoMatches[1];
@@ -34,17 +34,12 @@ function llenarTabla() {
             var cell = newRow.insertCell();
 
             if (j === 1) {
-                var enlace = document.createElement('a');
-                enlace.href = cellValue;
-                enlace.target = '_blank';
+                var iframe = document.createElement('iframe');
+                iframe.src = extractDriveImageUrl(cellValue);
+                iframe.width = '150px';
+                iframe.allow = 'autoplay';
 
-                var img = document.createElement('img');
-                img.src = extractDriveImageUrl(cellValue);
-                img.style.maxWidth = '100px';
-                img.style.height = 'auto';
-
-                enlace.appendChild(img);
-                cell.appendChild(enlace);
+                cell.appendChild(iframe);
             } else {
                 cell.appendChild(document.createTextNode(cellValue));
             }

@@ -67,7 +67,8 @@
                         required>
                     <span>Descripción De la Publicación</span>
                 </label>
-                <button type="button" class="submit" onclick="enviarDatos()">Enviar Datos</button>
+                <button type="button" class="submit" id="enviarBoton" onclick="enviarDatos()">Enviar Datos</button>
+
             </form>
         </div>
 
@@ -75,13 +76,14 @@
 
     <script>
 
+        const enviarBoton = document.getElementById('enviarBoton');
+        enviarBoton.setAttribute('disabled', 'true');
+
         const nombreHojaInput = document.getElementById('nombreHoja');
         const contenidoCelda1Input = document.getElementById('contenidoCelda1');
         const contenidoCelda2Input = document.getElementById('contenidoCelda2');
         const contenidoCelda3Input = document.getElementById('contenidoCelda3');
-        const enviarBoton = document.getElementById('enviarBoton');
 
-        // Función para habilitar o deshabilitar el botón de enviar según el contenido de los campos
         function verificarCampos() {
             if (
                 nombreHojaInput.value.trim() !== '' &&
@@ -95,7 +97,6 @@
             }
         }
 
-        // Llamamos a la función de verificación cuando cambia el contenido de los campos
         nombreHojaInput.addEventListener('input', verificarCampos);
         contenidoCelda1Input.addEventListener('input', verificarCampos);
         contenidoCelda2Input.addEventListener('input', verificarCampos);
