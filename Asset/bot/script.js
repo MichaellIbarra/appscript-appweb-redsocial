@@ -3,7 +3,21 @@ document.getElementById("userInput").addEventListener("input", function () {
     document.getElementById("send-btn").disabled = characterCount < 3;
 });
 
-function extractDriveImageUrl(cellValue) { var imageRegex = /https:\/\/drive\.google\.com\/open\?id=([\w-]+)/; var videoRegex = /https:\/\/drive\.google\.com\/file\/d\/([\w-]+)\/view/; var imageMatches = cellValue.match(imageRegex); var videoMatches = cellValue.match(videoRegex); if (imageMatches && imageMatches.length > 1) { var imageId = imageMatches[1]; return `http://drive.google.com/uc?export=view&id=${imageId}`; } if (videoMatches && videoMatches.length > 1) { var videoId = videoMatches[1]; return `https://drive.google.com/file/d/${videoId}/preview`; } return ''; }
+function extractDriveImageUrl(cellValue) {
+    var imageRegex = /https:\/\/drive\.google\.com\/open\?id=([\w-]+)/;
+    var videoRegex = /https:\/\/drive\.google\.com\/file\/d\/([\w-]+)\/view/;
+    var imageMatches = cellValue.match(imageRegex);
+    var videoMatches = cellValue.match(videoRegex);
+    if (imageMatches && imageMatches.length > 1) {
+        var imageId = imageMatches[1];
+        return `https://drive.google.com/file/d/${imageId}/preview`; // Cambio aquí
+    }
+    if (videoMatches && videoMatches.length > 1) {
+        var videoId = videoMatches[1];
+        return `https://drive.google.com/file/d/${videoId}/preview`;
+    }
+    return '';
+}
 
 var apiKey = 'AIzaSyAmCLwuc94_hiXPDcVsYWV7toMyPqsrot8', url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${hoja}?key=${apiKey}`;
 w9wqhwdigwq
@@ -58,7 +72,8 @@ function enviarMensaje() {
                         var titulo = fila[2];
                         var descripcion = fila[3];
                         var categoria = fila[4];
-                        respuesta += `<p><strong>Fecha de la Noticia:</strong> ${marcaTemporal}</p><a href="${fotoOVideo}" target="_blank"><img style="margin-bottom: 10px;" width="290" height="200" src="${fotoOVideo}" alt="Dar Click"></a><p><strong>Título:</strong> ${titulo}</p><p><strong>Descripción:</strong> ${descripcion}</p><p><strong>Categoría:</strong> ${categoria}</p><hr>`;
+                        respuesta += `<p><strong>Fecha de la Noticia:</strong> ${marcaTemporal}</p><a href="${fotoOVideo}" target="_blank"><iframe style="margin-bottom: 10px;" width="290" height="200" src="${fotoOVideo}" alt="Dar Click"></iframe>
+                            </a><p><strong>Título:</strong> ${titulo}</p><p><strong>Descripción:</strong> ${descripcion}</p><p><strong>Categoría:</strong> ${categoria}</p><hr>`;
                         resultadosEncontrados = true;
                     }
                 }
@@ -71,3 +86,5 @@ function enviarMensaje() {
         .catch(error => console.error('Error al obtener los datos:', error));
     document.getElementById('userInput').value = '';
 }
+
+
