@@ -23,9 +23,22 @@
 
 ![Downloads](https://img.shields.io/github/downloads/MichaellIbarra/Automatizacion-ValeProvisional/total) ![Contributors](https://img.shields.io/github/contributors/MichaellIbarra/MichaellIbarra?color=dark-green) ![Issues](https://img.shields.io/github/issues/MichaellIbarra/MichaellIbarra) ![License](https://img.shields.io/github/license/MichaellIbarra/MichaellIbarra) 
 
+
 ## About The Project
 
-![Screen Shot](Asset/img/publicacion.jpeg)
+![Screen Shot](Asset/img/RegistrarNoticias.jpeg)
+
+
+
+## About The Project
+
+![Screen Shot](Asset/img/VisualizarNoticias.jpeg)
+
+
+
+## About The Project
+
+![Screen Shot](Asset/img/Publicación.jpeg)
 
 
 There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
@@ -39,7 +52,7 @@ Here's why:
 
 ## About The Project
 
-![Screen Shot](Asset/img/chatbot.jpeg)
+![Screen Shot](Asset/img/Chatbot.jpeg)
 
 
 
