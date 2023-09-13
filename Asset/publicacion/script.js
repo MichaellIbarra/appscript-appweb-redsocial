@@ -1,6 +1,6 @@
 function extractDriveId(cellValue) { var regex = /https:\/\/drive\.google\.com\/file\/d\/([\w-]+)/; var matches = cellValue.match(regex); if (matches && matches.length > 1) { var imageId = matches[1]; return imageId; } return ''; }
 function extractDriveImageUrl(cellValue) { var regex = /https:\/\/drive\.google\.com\/file\/d\/([\w-]+)/; var matches = cellValue.match(regex); if (matches && matches.length > 1) { var imageId = matches[1]; return `https://drive.google.com/uc?export=view&id=${imageId}`; } return ''; }
-var apiKey = 'AIzaSyAmCLwuc94_hiXPDcVsYWV7toMyPqsrot8', currentRow = 0, allMessagesVisible = false;
+var apiKey = 'AIzaSyAeFyzG2EmC73knpgykBCEAg-DmOCV_Muw', currentRow = 0, allMessagesVisible = false;
 const spreadsheetId = '1IO8BIE58F3D70EMkY-KIwl1A6sOw90fZTQwRcuzc9jc';
 function chatMostrar() { var chatMessages = document.querySelectorAll('.chat-message'); var toggleButton = document.getElementById('toggleButton'); if (!allMessagesVisible) { for (var i = currentRow + 4; i < chatMessages.length; i++) { chatMessages[i].style.display = 'none'; } toggleButton.textContent = 'Mostrar todos los mensajes'; } else { for (var i = currentRow + 4; i < chatMessages.length; i++) { chatMessages[i].style.display = 'flex'; } toggleButton.textContent = 'Solo los 4 primeros mensajes'; } allMessagesVisible = !allMessagesVisible; }
 function OcultarTodo() { var chatMessages = document.querySelectorAll('.chat-message'); for (var i = 4; i < chatMessages.length; i++) { chatMessages[i].style.display = 'none'; } }
