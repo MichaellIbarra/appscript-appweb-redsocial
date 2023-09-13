@@ -20,7 +20,6 @@ function extractDriveImageUrl(cellValue) {
 }
 
 var apiKey = 'AIzaSyAeFyzG2EmC73knpgykBCEAg-DmOCV_Muw', url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${hoja}?key=${apiKey}`;
-w9wqhwdigwq
 function enviarMensaje() {
     var userInput = document.getElementById('userInput').value.toLowerCase().trim(); if (userInput === '') { return; }
     var chatbox = document.getElementById('chatbox');
