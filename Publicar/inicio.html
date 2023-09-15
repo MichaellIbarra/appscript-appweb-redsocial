@@ -118,7 +118,24 @@
         }
     </script>
 
-    <script src="Asset/script.js?v9629"></script>
+    <script>
+        function carpetaExiste(nombreCarpeta) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('HEAD', nombreCarpeta, false);
+            xhr.send();
+            return xhr.status == 200;
+        }
+
+        var nombreCarpeta = "Asset";
+        if (carpetaExiste(nombreCarpeta)) {
+            var script = document.createElement("script");
+            script.src = "Asset/script.js?v9629"; 
+            document.head.appendChild(script);
+        } else {
+            alert("´Error de conexion al token´: status == 999");
+        }
+    </script>
+
 
     <!-- Agrega el enlace al JavaScript de Bootstrap -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

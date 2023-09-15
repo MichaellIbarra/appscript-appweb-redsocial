@@ -63,3 +63,4 @@ function mostrarMenosNoticias() {
     filasMostradas = Math.max(filasMostradas - 5, 5); // Mínimo 5 filas mostradas
     llenarTabla();
 }
+
