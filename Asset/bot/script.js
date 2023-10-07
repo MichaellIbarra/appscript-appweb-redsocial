@@ -19,7 +19,7 @@ function extractDriveImageUrl(cellValue) {
     return '';
 }
 
-var apiKey = 'AIzaSyAeFyzG2EmC73knpgykBCEAg-DmOCV_Muw', url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${hoja}?key=${apiKey}`;
+var apiKey = 'AIzaSyAdiweKZ2zMINXafvC_q4VFiIDLooZfr1M', url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${hoja}?key=${apiKey}`;
 function enviarMensaje() {
     var userInput = document.getElementById('userInput').value.toLowerCase().trim(); if (userInput === '') { return; }
     var chatbox = document.getElementById('chatbox');
