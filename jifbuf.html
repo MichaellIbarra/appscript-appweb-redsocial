@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obtener Lista de Hojas</title>
+</head>
+
+<body>
+    <h1>Obtener Lista de Hojas</h1>
+
+    <!-- Agrega el script de la API de Google y tu script JavaScript -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="tu-archivo-javascript.js"></script>
+    <script>
+        // Incluye la API de Google
+        gapi.load('client', start);
+
+        function start() {
+            // Inicializa la API con tus credenciales
+            gapi.client.init({
+                apiKey: 'AIzaSyAdiweKZ2zMINXafvC_q4VFiIDLooZfr1M',
+                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+            }).then(function () {
+                // Llama a la función para obtener la lista de hojas
+                listSheets('https://docs.google.com/spreadsheets/d/1IO8BIE58F3D70EMkY-KIwl1A6sOw90fZTQwRcuzc9jc/edit#gid=831697332');
+            });
+        }
+
+        function listSheets(sheetUrl) {
+            // Extrae el ID del Google Sheet desde la URL
+            const sheetId = sheetUrl.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/)[1];
+
+            // Realiza la solicitud a la API de Google Sheets
+            gapi.client.sheets.spreadsheets.get({
+                spreadsheetId: sheetId,
+            }).then(function (response) {
+                // Obtiene la lista de hojas
+                const sheets = response.result.sheets;
+
+                // Imprime la lista de hojas
+                console.log('Lista de Hojas:');
+                sheets.forEach(function (sheet) {
+                    console.log('- ' + sheet.properties.title);
+                });
+            }, function (reason) {
+                console.error('Error: ' + reason.result.error.message);
+            });
+        }
+
+    </script>
+</body>
+
+</html>
