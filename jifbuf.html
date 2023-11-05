@@ -38,11 +38,8 @@
             }).then(function (response) {
                 // Obtiene la lista de hojas
                 const sheets = response.result.sheets;
-
-                // Imprime la lista de hojas
-                console.log('Lista de Hojas:');
                 sheets.forEach(function (sheet) {
-                    console.log('- ' + sheet.properties.title);
+                    console.log(sheet.properties.title);
                 });
             }, function (reason) {
                 console.error('Error: ' + reason.result.error.message);
